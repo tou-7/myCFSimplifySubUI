@@ -134,7 +134,6 @@ export function singboxJson14(groups, outbounds) {
                         "url": "https://app.ifxxku.dpdns.org/ZhongGitHub/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
                         "http_client": {
                             "version": 2,
-                            "detour": "direct",
                             "stream_receive_window": 0,
                             "connection_receive_window": 0
                         }
@@ -146,7 +145,6 @@ export function singboxJson14(groups, outbounds) {
                         "url": "https://app.ifxxku.dpdns.org/ZhongGitHub/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
                         "http_client": {
                             "version": 2,
-                            "detour": "direct",
                             "stream_receive_window": 0,
                             "connection_receive_window": 0
                         }
