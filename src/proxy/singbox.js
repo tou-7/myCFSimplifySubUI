@@ -2,7 +2,188 @@
 import { nginx, responseURL } from '../html.js';
 
 
-export function newSingboxJson(groups, outbounds) {
+export function singboxJson14(groups, outbounds) {
+    let json = `
+        {
+            "dns": {
+                "servers": [
+                    {
+                        "type": "https",
+                        "tag": "remote",
+                        "detour": "select",
+                        "server": "1.1.1.1",
+                        "server_port": 443,
+                        "tls": {
+                            "enabled": true,
+                            "server_name": "1.1.1.1"
+                        }
+                    },
+                    {
+                        "type": "https",
+                        "tag": "local",
+                        "server": "1.12.12.12",
+                        "server_port": 443,
+                        "tls": {
+                            "enabled": true,
+                            "server_name": "1.12.12.12"
+                        }
+                    }
+                ],
+                "rules": [
+                    {
+                        "action": "evaluate",
+                        "server": "remote"
+                    },
+                    {
+                        "clash_mode": "direct",
+                        "match_response": true,
+                        "server": "local"
+                    },
+                    {
+                        "clash_mode": "global",
+                        "server": "remote"
+                    },
+                    {
+                        "rule_set": "geosite-cn",
+                        "match_response": true,
+                        "server": "local"
+                    },
+                    {
+                        "server": "remote"
+                    }
+                ]
+            },
+            "inbounds": [
+                {
+                    "type": "mixed",
+                    "tag": "mixed-in",
+                    "listen": "127.0.0.1",
+                    "listen_port": 2080
+                },
+                {
+                    "type": "tun",
+                    "tag": "tun-in",
+                    "mtu": 9000,
+                    "address": [
+                        "172.19.0.1/30"
+                    ],
+                    "auto_route": true,
+                    "strict_route": false,
+                    "route_address": [
+                        "0.0.0.0/1",
+                        "128.0.0.0/1"
+                    ],
+                    "route_exclude_address": [
+                        "192.168.0.0/16"
+                    ],
+                    "stack": "gvisor",
+                    "platform": {
+                        "http_proxy": {
+                            "enabled": true,
+                            "server": "127.0.0.1",
+                            "server_port": 2080
+                        }
+                    }
+                }
+            ],
+            "outbounds": [
+                ${groups}
+                ${outbounds}
+                {
+                    "type": "direct",
+                    "tag": "direct"
+                }
+            ],
+            "route": {
+                "default_domain_resolver": "local",
+                "rules": [
+                    {
+                        "action": "sniff"
+                    },
+                    {
+                        "protocol": "dns",
+                        "action": "hijack-dns"
+                    },
+                    {
+                        "network": "udp",
+                        "port": 443,
+                        "action": "reject"
+                    },
+                    {
+                        "clash_mode": "direct",
+                        "outbound": "direct"
+                    },
+                    {
+                        "clash_mode": "global",
+                        "outbound": "select"
+                    },
+                    {
+                        "rule_set": "geosite-cn",
+                        "outbound": "direct"
+                    },
+                    {
+                        "rule_set": "geoip-cn",
+                        "outbound": "direct"
+                    }
+                ],
+                "rule_set": [
+                    {
+                        "tag": "geosite-cn",
+                        "type": "remote",
+                        "format": "binary",
+                        "url": "https://app.ifxxku.dpdns.org/ZhongGitHub/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+                        "http_client": {
+                            "version": 2,
+                            "detour": "direct",
+                            "stream_receive_window": 0,
+                            "connection_receive_window": 0
+                        }
+                    },
+                    {
+                        "tag": "geoip-cn",
+                        "type": "remote",
+                        "format": "binary",
+                        "url": "https://app.ifxxku.dpdns.org/ZhongGitHub/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+                        "http_client": {
+                            "version": 2,
+                            "detour": "direct",
+                            "stream_receive_window": 0,
+                            "connection_receive_window": 0
+                        }
+                    }
+                ],
+                "auto_detect_interface": true
+            },
+            "experimental": {
+                "cache_file": {
+                    "enabled": true,
+                    "store_dns": true
+                },
+                "clash_api": {
+                    "external_controller": "127.0.0.1:9090",
+                    "external_ui": "ui",
+                    "secret": "",
+                    "external_ui_download_url": "",
+                    "external_ui_download_detour": "select",
+                    "default_mode": "rule"
+                }
+            }
+        }
+        `
+    //console.log(json);
+    try {
+
+        let jsonStr = JSON.parse(json);
+
+        let formattedJson = JSON.stringify(jsonStr, null, 2);
+
+        return responseURL(formattedJson, "application/json");
+    } catch (e) {
+        return nginx();
+    }
+}
+
+export function singboxJson13(groups, outbounds) {
     let json = `
         {
             "dns": {
@@ -177,7 +358,7 @@ export function newSingboxJson(groups, outbounds) {
     }
 }
 
-export async function singboxJson(groups, outbounds) {
+export async function singboxJson11(groups, outbounds) {
     let json = `
         {
             "dns": {

@@ -1,4 +1,4 @@
-import { newSingboxJson } from './singbox.js'
+import { singboxJson14 } from './singbox.js'
 import { clashYaml } from './clash.js'
 import { nginx, responseURL } from '../html.js';
 
@@ -396,7 +396,7 @@ export async function jsonProxy(node, backup) {
         groups = proxySelect(proxys)
     }
 
-    return newSingboxJson(groups, outbounds)
+    return singboxJson14(groups, outbounds)
 
 }
 
