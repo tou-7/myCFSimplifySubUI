@@ -118,19 +118,23 @@ export default {
 
 	async scheduled(_, env) {
 
-		if (SubConfig.node_cf === "true") {
-			await getIpsStr(env)
-		}
-
-		if (SubConfig.proxy_model === "3x-ui" ||
-			SubConfig.proxy_model === "xray" ||
-			SubConfig.proxy_model === "sing-box"
-		) {
-			await getUsersData(env)
-			if (SubConfig.proxy_model === "3x-ui") {
-				await updateGeofile()
-			}
-		}
+	    await getSubConfig(env)
+	
+	    if (SubConfig.node_cf === "true") {
+	        await getIpsStr(env)
+	    }
+	
+	    switch (SubConfig.proxy_model) {
+	        case "3x-ui":
+	            await getUsersData(env)
+	            await updateGeofile()
+	            break
+	
+	        case "xray":
+	        case "sing-box":
+	            await getUsersData(env)
+	            break
+	    }	
 	}
 };
 
