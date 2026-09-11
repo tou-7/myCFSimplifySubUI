@@ -429,6 +429,7 @@ export function renewConfig(obj) {
                 users.push(
                     {
                         "name": user.name,
+                        "enable": user.enable,
                         "proxurl_not_base64": user.proxurl_not_base64,
                         "nodes": user.nodes,
                         "sub_url": user.sub_url

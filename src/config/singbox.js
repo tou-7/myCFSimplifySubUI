@@ -224,6 +224,7 @@ export function getSingBoxData(config, modus) {
                 let uuid = user.uuid
                 let password
                 let notBase64 = "false"
+                let enable = "true"
 
                 if (protocol === "naive") {
                     name = user.username
@@ -247,10 +248,15 @@ export function getSingBoxData(config, modus) {
 
                     for (const user of users) {
                         if (user.name === name) {
+
+                             if (user.enable === "false") {
+                                enable = "false"
+                            }
+
                             if (user.proxurl_not_base64 === "true") {
                                 notBase64 = "true"
                             }
-
+                            
                             const re = new RegExp("^\/[a-zA-Z0-9\/]{6,}\/" + user.name + "\.$");
 
                             if (re.test(user.sub_url)) {
@@ -267,6 +273,7 @@ export function getSingBoxData(config, modus) {
 
                     newUsers.push({
                         "name": name,
+                        "enable":enable,
                         "proxurl_not_base64": notBase64,
                         "nodes": nodes,
                         "sub_url": sub_url
@@ -277,7 +284,7 @@ export function getSingBoxData(config, modus) {
                 arr.push(
                     {
                         "name": name,
-                        "enable": null,
+                        "enable": enable,
                         "up": "暂无",
                         "down": "暂无",
                         "sub_url": sub_url,
