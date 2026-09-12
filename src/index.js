@@ -118,23 +118,23 @@ export default {
 
 	async scheduled(_, env) {
 
-	    await getSubConfig(env)
-	
-	    if (SubConfig.node_cf === "true") {
-	        await getIpsStr(env)
-	    }
-	
-	    switch (SubConfig.proxy_model) {
-	        case "3x-ui":
-	            await getUsersData(env)
-	            await updateGeofile()
-	            break
-	
-	        case "xray":
-	        case "sing-box":
-	            await getUsersData(env)
-	            break
-	    }	
+		await getSubConfig(env)
+
+		if (SubConfig.node_cf === "true") {
+			await getIpsStr(env)
+		}
+
+		switch (SubConfig.proxy_model) {
+			case "3x-ui":
+				await getUsersData(env)
+				await updateGeofile()
+				break
+
+			case "xray":
+			case "sing-box":
+				await getUsersData(env)
+				break
+		}
 	}
 };
 
@@ -372,7 +372,7 @@ function setUsersArr(func, obj, model = "renew") {
 		newConfig.users_arr = [...newConfig.users_arr, ...resultObj.users_arr]
 	}
 
-	
+
 	return renewConfig(newConfig)
 
 }
@@ -624,12 +624,16 @@ async function userHomeUrl(request, name, userUrl, up, down) {
 		<a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#v2rayN" target="_blank" rel="noopener noreferrer" > v2rayN(建议) </a>
 		<a href="https://guide.myargo.de5.net/v2rayN" target="_blank" rel="noopener noreferrer" > (使用教程) </a> 
 		<br/><br/>
+        <a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#singBox" target="_blank" rel="noopener noreferrer" > sing-box 官方 app </a>
+		<a href="https://guide.myargo.de5.net/singbox" target="_blank" rel="noopener noreferrer" > (使用教程) </a>
+		<br/><br/>
 		<a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#clashMi" target="_blank" rel="noopener noreferrer" > clash mi </a>
 		<a href="https://guide.myargo.de5.net/clashMi" target="_blank" rel="noopener noreferrer" > (使用教程) </a>
 		<p>Mac os</p>
 		<a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#v2rayN" target="_blank" rel="noopener noreferrer" > v2rayN(建议) </a> 
 		<br/><br/>
-		<a href="https://app.ifxxku.dpdns.org/ZhongApp/other.html#sb11115m" target="_blank" rel="noopener noreferrer" > sing-box app </a>
+        <a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#singBox" target="_blank" rel="noopener noreferrer" > sing-box 官方 app </a>
+		<a href="https://guide.myargo.de5.net/singbox" target="_blank" rel="noopener noreferrer" > (使用教程) </a>
 		<br/><br/>
 		<a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#clashMi" target="_blank" rel="noopener noreferrer" > clash mi </a>
 		<a href="https://guide.myargo.de5.net/clashMi" target="_blank" rel="noopener noreferrer" > (使用教程) </a> 
@@ -637,7 +641,8 @@ async function userHomeUrl(request, name, userUrl, up, down) {
 		<a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#v2rayNG" target="_blank" rel="noopener noreferrer" > v2rayNG(建议) </a> 
 		<a href="https://guide.myargo.de5.net/v2rayNG" target="_blank" rel="noopener noreferrer" > (使用教程) </a>
 		<br/><br/>
-		<a href="https://app.ifxxku.dpdns.org/ZhongApp/other.html#sb11115a" target="_blank" rel="noopener noreferrer" > sing-box app </a>
+        <a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#singBox" target="_blank" rel="noopener noreferrer" > sing-box 官方 app </a>
+		<a href="https://guide.myargo.de5.net/singbox" target="_blank" rel="noopener noreferrer" > (使用教程) </a>
 		<br/><br/>
 		<a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#clashMi" target="_blank" rel="noopener noreferrer" > clash mi </a>
 		<a href="https://guide.myargo.de5.net/clashMi" target="_blank" rel="noopener noreferrer" > (使用教程) </a> 
@@ -645,7 +650,8 @@ async function userHomeUrl(request, name, userUrl, up, down) {
 		<a href="https://apps.apple.com/us/app/shadowrocket/id932747118" target="_blank" rel="noopener noreferrer" > 小火箭(付费,建议) </a>
 		<a href="https://guide.myargo.de5.net/shadowrocket" target="_blank" rel="noopener noreferrer" > (使用教程) </a> 
 		<br/> <br/>
-		<a href="https://apps.apple.com/us/app/sing-box-vt/id6673731168" target="_blank" rel="noopener noreferrer" > sing-box app </a> 
+		<a href="https://apps.apple.com/us/app/sing-box-mt/id6785326793" target="_blank" rel="noopener noreferrer" > sing-box 官方 app </a> 
+				<a href="https://guide.myargo.de5.net/singbox" target="_blank" rel="noopener noreferrer" > (使用教程) </a>
 		<br/><br/>
 		<a href="https://app.ifxxku.dpdns.org/ZhongApp/releases.html#clashMi" target="_blank" rel="noopener noreferrer" > clash mi </a> 
 		<a href="https://guide.myargo.de5.net/clashMi" target="_blank" rel="noopener noreferrer" > (使用教程) </a>
